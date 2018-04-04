@@ -55,7 +55,13 @@ def test():
 		except KeyError:
 			test_output_map[chr(test_output[i]+ord('A'))][predicted]=1
 	return test_output_map
-
+def getAccuracy():
+	print('Calculating Accuracy')
+	model_path = './trained_model/AlphaClassifier.pkl'
+	model = load(open(model_path,'rb'))
+	_,_,test_input,test_output = get_train_test()
+	print('The accuracy of model is',model.score(test_input, test_output)*100)
+	
 def print_mismatchMatrix(test_output_map={}):
 	print('  ',end='')
 	print(''.join([i.ljust(4) for i in ascii_uppercase]))
